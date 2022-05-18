@@ -2,6 +2,8 @@ import coins.Coin;
 import coins.CoinReturn;
 import coins.ITotalCoins;
 import drawers.Drawer;
+import drawers.DrawerCode;
+import products.Product;
 
 import java.util.ArrayList;
 
@@ -38,10 +40,66 @@ public class VendingMachine implements ITotalCoins {
     }
 
     public double calculateCoinsTotal(){
-    double total = 0;
-    for(Coin coin: coinsEntered){
-        total = Double.sum(total, coin.getCoinValue());
+        double total = 0;
+        for(Coin coin: coinsEntered){
+            total = Double.sum(total, coin.getCoinValue());
+        }
+        return total;
     }
-    return total;
+
+    public boolean checkCoinValid(Coin coin){
+        return coin.getCoinType().isValid();
     }
+
+    public void insertCoin(Coin coin){
+        if(checkCoinValid(coin)){
+            addCoin(coin);
+        }else{
+            getCoinReturn().addCoin(coin);
+        }
+    }
+
+    public double getPriceFromCode(DrawerCode code){
+        for(Drawer drawer: drawers){
+            if(drawer.getCode() == code){
+                return drawer.getPrice();
+            }
+        }
+        return 0;
+    }
+
+    public Drawer getDrawerFromCode(DrawerCode code){
+
+        for(Drawer drawer: drawers){
+            if(drawer.getCode() == code){
+                return drawer;
+            }
+        }
+        return null;
+    }
+
+    public double calculateChangeToReturn(double price){
+        return calculateCoinsTotal() - price;
+    }
+
+//    public ArrayList<Coin> allocateCoinsToReturn(){
+//
+//    }
+
+    public Product buyProduct(DrawerCode code){
+        Drawer drawer = getDrawerFromCode(code);
+        double price = getPriceFromCode(code);
+        if(price > 0){ //calculateCoinsTotal() >= price &&
+            double change = calculateChangeToReturn(price);
+            coinsEntered.clear();
+            return drawer.removeProduct();
+        } else{
+            System.out.println("Please insert more coins to the value of " + (price-calculateCoinsTotal()));
+            return null;
+        }
+
+
+
+    }
+
 }
