@@ -3,10 +3,12 @@ package products;
 public abstract class Product {
     private String name;
     private String brand;
+    private double price;
 
     public Product(String name, String brand) {
         this.name = name;
         this.brand = brand;
+        this.price = 0.0;
     }
 
     public String getName() {
@@ -17,4 +19,7 @@ public abstract class Product {
         return brand;
     }
 
+    public double getPrice() {
+        return price;
+    }
 }

@@ -11,4 +11,8 @@ public class Coin {
     public CoinType getCoinType() {
         return coinType;
     }
+
+    public double getCoinValue(){
+        return coinType.getValue();
+    }
 }

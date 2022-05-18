@@ -38,6 +38,11 @@ public class CoinTest {
         assertEquals(0.05, coin.getCoinType().getValue(), 0.0);
     }
 
+    @Test
+    public void canGetValue(){
+        assertEquals(0.05, coin.getCoinValue(), 0.0);
+    }
+
 
 
 

@@ -1,6 +1,7 @@
 package drawers;
 
 import products.Product;
+import products.Sweet;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,30 @@ public class Drawer {
         return code;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public boolean productsTypeMatch(Product product){
+        if(products.size() == 0 || product.getPrice() == price){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void addProduct(Product product) {
+        if( productsTypeMatch(product) && products.size() < 5){
+        products.add(product);
+        this.price = product.getPrice();}
+    }
+
+    public Product removeProduct(){
+        if(products.size() > 0){
+
+            Product vendedProduct = products.remove(0);
+            if(products.size()==0){
+                this.price = 0;
+
+            }
+            return vendedProduct;
+        }
+        return null;
     }
 }
