@@ -4,8 +4,11 @@ import coins.ITotalCoins;
 import drawers.Drawer;
 import drawers.DrawerCode;
 import products.Product;
+import java.lang.Double;
 
 import java.util.ArrayList;
+
+import static java.lang.Double.compare;
 
 public class VendingMachine implements ITotalCoins {
 
@@ -89,12 +92,12 @@ public class VendingMachine implements ITotalCoins {
     public Product buyProduct(DrawerCode code){
         Drawer drawer = getDrawerFromCode(code);
         double price = getPriceFromCode(code);
-        if(price > 0){ //calculateCoinsTotal() >= price &&
+        if(compare(calculateCoinsTotal(), price) > 0  && price > 0){ //
             double change = calculateChangeToReturn(price);
             coinsEntered.clear();
             return drawer.removeProduct();
         } else{
-            System.out.println("Please insert more coins to the value of " + (price-calculateCoinsTotal()));
+            System.out.println("Please insert more coins to the value of GBP " + (price-calculateCoinsTotal()));
             return null;
         }
 

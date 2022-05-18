@@ -117,9 +117,21 @@ public class VendingMachineTest {
 
     @Test
     public void canBuySweet(){
-        vendingMachine.insertCoin(coin3);
+        vendingMachine.insertCoin(coin);
         drawer.addProduct(sweet);
+        assertEquals(1, vendingMachine.calculateCoinsTotal(), 0.0);
+        assertEquals(1, drawer.getProducts().size());
         assertEquals(sweet, vendingMachine.buyProduct(DrawerCode.A1));
+        assertEquals(0, vendingMachine.calculateCoinsTotal(),0.0);
+
+
+    }
+
+    @Test
+    public void canNotBuySweet(){
+        vendingMachine.insertCoin(coin2);
+        drawer.addProduct(sweet);
+        assertEquals(null, vendingMachine.buyProduct(DrawerCode.A1));
     }
 
 
