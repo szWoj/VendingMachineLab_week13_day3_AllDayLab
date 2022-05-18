@@ -1,4 +1,8 @@
-public class Sweet extends Product{
+package products;
+
+import products.Product;
+
+public class Sweet extends Product {
 
     private double price;
 

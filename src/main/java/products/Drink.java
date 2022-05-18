@@ -1,4 +1,8 @@
-public class Drink extends Product{
+package products;
+
+import products.Product;
+
+public class Drink extends Product {
 
     private double price;
 

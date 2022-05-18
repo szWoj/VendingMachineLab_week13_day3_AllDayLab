@@ -1,5 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
+import products.Sweet;
 
 import static org.junit.Assert.assertEquals;
 
